@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\Lenovo\eclipse-workspace\Kafka\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3295144224.index
+3008505041.index
+765426525.index
+211144193.index
+3355430492.index
+663412677.index

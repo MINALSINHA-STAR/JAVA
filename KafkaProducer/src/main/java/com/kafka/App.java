@@ -1,0 +1,33 @@
+  package com.kafka;
+
+import java.util.Properties;
+
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.serialization.StringSerializer;
+
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        //1. Set Kafka Configuration(Bootstrap server, key and value serialization)
+    	Properties props = new Properties();
+    	props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+    	props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    	props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+    	
+    	//2. Create Kafka Producer
+    	KafkaProducer<String, String> producer = new KafkaProducer(props);
+    	
+    	//3. Create & send Messages
+    	for(int i =0; i< 10;i++) {
+    	ProducerRecord<String, String> record = new ProducerRecord("orderCart02", "ord", "Test on producer "+i);
+    	producer.send(record);
+    	}
+    	//4. Close Producer
+    	producer.close();
+    	System.out.println("message has sent successfully");
+    }
+}
