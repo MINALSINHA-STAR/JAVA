@@ -25,9 +25,8 @@ spring:
       hibernate:
         format_sql: true
 
-
-         zipkin:
-    base-url: http://localhost:9411   # changed from host.docker.internal
+  zipkin:
+    base-url: http://localhost:9411
     enabled: true
 
   sleuth:
@@ -41,8 +40,6 @@ spring:
       - X-B3-Sampled
       - X-B3-Flags
 
-
-
 # ===============================
 # Eureka Configuration
 # ===============================
@@ -51,8 +48,10 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
-
-      management:
+# ===============================
+# Actuator / Tracing
+# ===============================
+management:
   tracing:
     sampling:
       probability: 1.0
@@ -61,10 +60,9 @@ eureka:
       exposure:
         include: "*"
 
+# ===============================
+# Logging
+# ===============================
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p [${spring.application.name},%X{traceId},%X{spanId}] %logger{36} - %msg%n"
-
-
-
-    
