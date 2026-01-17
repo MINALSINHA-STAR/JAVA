@@ -1,1 +1,26 @@
+# ===============================
+# Server Configuration
+# ===============================
+server:
+  port: 8081
 
+# ===============================
+# Spring Configuration
+# ===============================
+spring:
+  application:
+    name: order-service01
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/orderdb
+    username: root
+    password: Kali@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
