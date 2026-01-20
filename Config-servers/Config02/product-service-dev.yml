@@ -24,19 +24,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-# ===============================
-# Eureka Configuration 
+        
+        # ===============================
+# Eureka Configuration
 # ===============================
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8762/eureka/
-
-# ===============================
-# Tracing
-# ===============================
-management:
-  tracing:
-    sampling:
-      probability: 1.0
+      defaultZone: http://localhost:8762/eureka
