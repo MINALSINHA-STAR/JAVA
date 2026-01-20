@@ -9,7 +9,7 @@ server:
 # ===============================
 spring:
   application:
-    name: myCart-app
+    name: mycart-user-service
 
   datasource:
     url: jdbc:mysql://localhost:3306/userdb
