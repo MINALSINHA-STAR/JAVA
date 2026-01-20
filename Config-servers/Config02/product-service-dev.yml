@@ -1,7 +1,16 @@
+# ===============================
+# Server Configuration
+# ===============================
 server:
   port: 8084
 
+# ===============================
+# Spring Configuration
+# ===============================
 spring:
+  application:
+    name: product-service
+
   datasource:
     url: jdbc:mysql://localhost:3306/productdb
     username: root
@@ -12,12 +21,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8762/eureka/
-
+    properties:
+      hibernate:
+        format_sql: true
+  
 management:
   tracing:
     sampling:
