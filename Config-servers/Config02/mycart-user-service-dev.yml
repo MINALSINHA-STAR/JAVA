@@ -32,3 +32,29 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8762/eureka
+
+      server:
+  port: 8084
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/productdb
+    username: root
+    password: Kali@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
