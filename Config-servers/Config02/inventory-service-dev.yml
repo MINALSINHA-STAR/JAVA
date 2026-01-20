@@ -24,13 +24,20 @@ spring:
     properties:
       hibernate:
         format_sql: true
-  eureka:
+
+# ===============================
+# Eureka Configuration  ✅ FIXED
+# ===============================
+eureka:
   client:
     service-url:
       defaultZone: http://localhost:8762/eureka/
     register-with-eureka: true
     fetch-registry: true
 
+# ===============================
+# Tracing & Actuator
+# ===============================
 management:
   tracing:
     sampling:
@@ -43,6 +50,9 @@ management:
       exposure:
         include: "*"
 
+# ===============================
+# Logging
+# ===============================
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %5p [${spring.application.name},%X{traceId},%X{spanId}] %logger{36} - %msg%n"
