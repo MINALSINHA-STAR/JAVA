@@ -35,6 +35,14 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
 
+
+# ===================Feign enable===
+  cloud:
+    openfeign:
+      micrometer:
+        enabled: true
+#================================
+
 # ===============================
 # Tracing & Actuator
 # ===============================
