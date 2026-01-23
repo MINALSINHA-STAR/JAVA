@@ -1,56 +1,41 @@
+server:
+  port: 8080
+
 spring:
-  application:
-    name: api-gateway
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+
       routes:
-        - id: mycart-user-service
-          uri: lb://mycart-user-service
-          predicates:
-            - Path=/api/users/**
-          filters:
-            - StripPrefix=2
-        - id: product-service
-          uri: lb://product-service
-          predicates:
-            - Path=/api/products/**
-          filters:
-            - StripPrefix=1
-            - id: inventory-service
-          uri: lb://inventory-service
-          predicates:
-            - Path=/api/inventory/**
-          filters:
-            - StripPrefix=2
-          - id: cart-service
+        - id: cart-service
           uri: lb://cart-service
           predicates:
-            - Path=/api/cart/**
-          filters:
-            - StripPrefix=2
-           - id: order-service
+            - Path=/cart/**
+
+        - id: order-service
           uri: lb://order-service
           predicates:
-            - Path=/api/orders/**
-          filters:
-            - StripPrefix=2
-            - id: payment-service
+            - Path=/orders/**
+
+        - id: payment-service
           uri: lb://payment-service
           predicates:
-            - Path=/api/payments/**
-          filters:
-            - StripPrefix=2
-           
+            - Path=/payments/**
+
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**
+
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notifications/**
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8762/eureka
-    fetch-registry: true
-    register-with-eureka: true
-
-server:
-  port: 8080
