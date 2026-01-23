@@ -9,7 +9,22 @@ spring:
           enabled: true
           lower-case-service-id: true
 
-      routes:
+     routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/products/**
+
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**
+
         - id: cart-service
           uri: lb://cart-service
           predicates:
@@ -24,11 +39,6 @@ spring:
           uri: lb://payment-service
           predicates:
             - Path=/payments/**
-
-        - id: inventory-service
-          uri: lb://inventory-service
-          predicates:
-            - Path=/inventory/**
 
         - id: notification-service
           uri: lb://notification-service
