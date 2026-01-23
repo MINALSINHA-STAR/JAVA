@@ -14,44 +14,61 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/users/**
+            filters:
+            -StripPrefix=2
 
         - id: product-service
           uri: lb://product-service
           predicates:
             - Path=/products/**
+            filters:
+            -StripPrefix=2
 
         - id: inventory-service
           uri: lb://inventory-service
           predicates:
             - Path=/inventory/**
-
+            filters:
+            -StripPrefix=2
+            
         - id: cart-service
           uri: lb://cart-service
           predicates:
             - Path=/cart/**
-
+                filters:
+            -StripPrefix=2
+            
         - id: order-service
           uri: lb://order-service
           predicates:
             - Path=/orders/**
-
+            filters:
+            -StripPrefix=2
+            
         - id: payment-service
           uri: lb://payment-service
           predicates:
             - Path=/payments/**
+            filters:
+            -StripPrefix=2       
 
         - id: notification-service
           uri: lb://notification-service
           predicates:
             - Path=/notifications/**
+            filters:
+            -StripPrefix=2
 
           - id: review-service
             uri: lb://review-service
             predicates:
               - Path=/reviews/**
-
-
+              filters:
+            -StripPrefix=2
+            
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8762/eureka
+    fetch-registry: true
+    register-with-eureka: true
