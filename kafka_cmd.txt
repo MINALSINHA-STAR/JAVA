@@ -1,0 +1,57 @@
+docker ps
+--------------
+This shows running containers.
+
+Start Zookeeper
+---------------
+
+docker run -d --name zookeeper -p 2181:2181 -e ZOOKEEPER_CLIENT_PORT=2181 confluentinc/cp-zookeeper:latest
+
+
+Start Kafka
+--------------
+docker run -d --name kafka -p 9092:9092 -e KAFKA_BROKER_ID=1 -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 --link zookeeper confluentinc/cp-kafka:7.5.0
+
+
+List Topic
+--------------
+docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --list
+
+
+Create Topics
+--------------
+docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --create --topic order-events --partitions 3 --replication-factor 1
+
+Send message
+--------------
+docker exec -it kafka kafka-console-producer --bootstrap-server localhost:9092 --topic order-events
+
+Consume Message
+----------------
+docker exec -it kafka kafka-console-consumer --bootstrap-server localhost:9092 --topic order-events --from-beginning
+
+Where message has been stored
+--------------------------------
+docker exec -it kafka bash
+
+It shows the full (absolute) path of the directory you are currently in.
+-------------------------------------------------------------------------
+pwd
+
+This command lists files and directories with detailed information, sorted by time, in reverse order.
+----------------------------------------------------------------------------------------------------
+ls -ltr 
+
+It lists all files and directories inside Kafka’s data directory with full details, including hidden files, in a human-readable format.
+-----------------------------------------------------------------------------------------------------------------------------
+ls -lah /var/lib/kafka/data      
+[Option breakdown : In detail
+ls → list directory contents
+-l → long format (permissions, owner, size, date)
+-a → include hidden files (starting with .)
+-h → human-readable sizes (KB, MB, GB)
+📁 /var/lib/kafka/data → Kafka log/data directory (stores topics, partitions, offsets)]
+
+
+docker exec -it kafka kafka-consumer-groups --bootstrap-server localhost:9092 --group ordercart-java-consumer --topic orderCart --reset-offsets --to-earliest --execute
+
